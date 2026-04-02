@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About | AresForge">
+  <section class="page-hero">
+    <h1>About AresForge</h1>
+    <p>We are a software engineering firm focused on AI systems, automation, and the infrastructure that keeps intelligent workflows running reliably.</p>
+  </section>
+
+  <section class="about-content">
+    <div class="about-block">
+      <h2>Who We Are</h2>
+      <p>AresForge was founded by a full-stack engineer with deep experience building production systems across the stack — from APIs and backend infrastructure to UI/UX and AI agent pipelines. We work with businesses that are serious about leveraging AI but need an engineering partner who can actually deliver.</p>
+    </div>
+
+    <div class="about-block">
+      <h2>Why AresForge</h2>
+      <p>Most AI vendors sell you a tool. We build you a system. The difference is that a system is designed around your specific workflow, integrates with what you already use, and keeps working when things change. We stay engaged as a partner — not just a one-time contractor.</p>
+    </div>
+
+    <div class="about-block">
+      <h2>The Problem We Solve</h2>
+      <p>AI agents are powerful but fragile — they lose context between sessions, fail silently across integrations, and require constant babysitting without the right architecture underneath. AresForge builds the persistence, memory, and communication layers that make AI workflows actually reliable in production.</p>
+    </div>
+
+    <div class="about-block highlight">
+      <h2>Ready to work together?</h2>
+      <p>We take on a small number of clients at a time to ensure quality. If you're ready to build something serious, let's talk.</p>
+      <a href="/contact" class="cta">Get In Touch</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .page-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+  }
+  .page-hero p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .about-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .about-block:hover { border-color: var(--accent); }
+
+  .about-block h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+  }
+
+  .about-block p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .highlight {
+    border-color: var(--accent);
+    text-align: center;
+  }
+
+  .highlight p { margin-bottom: 1.5rem; }
+</style>

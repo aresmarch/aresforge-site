@@ -1,11 +1,42 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="AresForge | AI Engineering Solutions">
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Build Smarter.<br/>Stay in Context.</h1>
+    <p>AresForge delivers AI workflow automation, context persistence, and custom software engineering for businesses ready to scale intelligently.</p>
+    <a href="/contact" class="cta">Work With Us</a>
+  </section>
+
+  <!-- Services Preview -->
+  <section class="services-preview">
+    <h2>What We Build</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>AI Workflow Automation</h3>
+        <p>Eliminate manual repetitive processes with intelligent agents that work around the clock.</p>
+      </div>
+      <div class="card">
+        <h3>Context Persistence</h3>
+        <p>Keep your AI agents aligned across sessions, reboots, and model switches. No lost context, ever.</p>
+      </div>
+      <div class="card">
+        <h3>API & Integration</h3>
+        <p>Connect your tools, platforms, and AI systems into one seamless operational layer.</p>
+      </div>
+      <div class="card">
+        <h3>Custom Software</h3>
+        <p>Bespoke engineering solutions built to your exact requirements, on time and on budget.</p>
+      </div>
+    </div>
+    <a href="/services" class="secondary">See All Services →</a>
+  </section>
+
+  <!-- CTA Strip -->
+  <section class="cta-strip">
+    <h2>Ready to build something that works?</h2>
+    <a href="/contact" class="cta">Get In Touch</a>
+  </section>
 </Layout>
