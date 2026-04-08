@@ -2,33 +2,74 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About | AresForge">
+<Layout title="Services | AresForge">
   <section class="page-hero">
-    <h1>About AresForge</h1>
-    <p>We are a software engineering firm focused on AI systems, automation, and the infrastructure that keeps intelligent workflows running reliably.</p>
+    <h1>Services</h1>
+    <p>Engineering solutions built for the age of AI. We handle the complexity so you can focus on what matters.</p>
   </section>
 
-  <section class="about-content">
-    <div class="about-block">
-      <h2>Who We Are</h2>
-      <p>AresForge was founded by a full-stack engineer with deep experience building production systems across the stack — from APIs and backend infrastructure to UI/UX and AI agent pipelines. We work with businesses that are serious about leveraging AI but need an engineering partner who can actually deliver.</p>
+  <section class="services-list">
+    <div class="service-item">
+      <div class="service-icon">⚡</div>
+      <div class="service-content">
+        <h2>AI Workflow Automation</h2>
+        <p>We design and deploy intelligent agent pipelines that eliminate manual, repetitive work across your business operations. From data processing to customer follow-ups, your workflows run themselves.</p>
+        <ul>
+          <li>Custom agent design and deployment</li>
+          <li>Multi-step workflow automation</li>
+          <li>Integration with existing tools and platforms</li>
+          <li>Ongoing monitoring and optimization</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="about-block">
-      <h2>Why AresForge</h2>
-      <p>Most AI vendors sell you a tool. We build you a system. The difference is that a system is designed around your specific workflow, integrates with what you already use, and keeps working when things change. We stay engaged as a partner — not just a one-time contractor.</p>
+    <div class="service-item">
+      <div class="service-icon">🧠</div>
+      <div class="service-content">
+        <h2>Context Persistence & Agent Memory</h2>
+        <p>AI agents lose context between sessions — we fix that. Our context persistence layer keeps your agents aligned across reboots, model switches, and long-running workflows. No more starting from scratch.</p>
+        <ul>
+          <li>Session state management</li>
+          <li>Cross-agent context sharing</li>
+          <li>Memory architecture design</li>
+          <li>Works with Claude, GPT, and custom models</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="about-block">
-      <h2>The Problem We Solve</h2>
-      <p>AI agents are powerful but fragile — they lose context between sessions, fail silently across integrations, and require constant babysitting without the right architecture underneath. AresForge builds the persistence, memory, and communication layers that make AI workflows actually reliable in production.</p>
+    <div class="service-item">
+      <div class="service-icon">🔗</div>
+      <div class="service-content">
+        <h2>API & Integration Development</h2>
+        <p>We connect your tools, platforms, and AI systems into one seamless operational layer. If it has an API, we can make it talk to everything else you use.</p>
+        <ul>
+          <li>REST and GraphQL API development</li>
+          <li>Third-party platform integrations</li>
+          <li>Webhook and event-driven architectures</li>
+          <li>Legacy system modernization</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="about-block highlight">
-      <h2>Ready to work together?</h2>
-      <p>We take on a small number of clients at a time to ensure quality. If you're ready to build something serious, let's talk.</p>
-      <a href="/contact" class="cta">Get In Touch</a>
+    <div class="service-item">
+      <div class="service-icon">🛠️</div>
+      <div class="service-content">
+        <h2>Custom Software Development</h2>
+        <p>Bespoke full-stack engineering tailored to your exact requirements. From MVPs to production systems, we build software that scales with your business.</p>
+        <ul>
+          <li>Full-stack web application development</li>
+          <li>MVP scoping and delivery</li>
+          <li>Code review and technical consulting</li>
+          <li>System architecture design</li>
+        </ul>
+      </div>
     </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>Not sure which service fits?</h2>
+    <p>Let's talk. We'll figure out exactly what you need.</p>
+    <a href="/contact" class="cta">Book a Free Consultation</a>
   </section>
 </Layout>
 
@@ -52,8 +93,8 @@ import Layout from '../layouts/Layout.astro';
     margin: 0 auto;
   }
 
-  .about-content {
-    max-width: 800px;
+  .services-list {
+    max-width: 1100px;
     margin: 0 auto;
     padding: 2rem 2rem 5rem;
     display: flex;
@@ -61,32 +102,58 @@ import Layout from '../layouts/Layout.astro';
     gap: 2rem;
   }
 
-  .about-block {
+  .service-item {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 2rem;
+    display: flex;
+    gap: 2rem;
     transition: border-color 0.2s;
   }
-  .about-block:hover { border-color: var(--accent); }
+  .service-item:hover { border-color: var(--accent); }
 
-  .about-block h2 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: var(--accent);
-  }
-
-  .about-block p {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.8;
-  }
-
-  .highlight {
-    border-color: var(--accent);
+  .service-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    width: 48px;
     text-align: center;
   }
 
-  .highlight p { margin-bottom: 1.5rem; }
+  .service-content h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-content p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .service-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .service-content ul li {
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .service-content ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .service-item { flex-direction: column; gap: 1rem; }
+  }
 </style>
