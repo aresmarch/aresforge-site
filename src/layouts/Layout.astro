@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+--font: 'DM Sans', system-ui, sans-serif;
 ---
 const { title } = Astro.props;
 ---
@@ -85,12 +89,13 @@ const { title } = Astro.props;
     justify-content: space-between;
   }
 
-  .logo {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.5px;
-  }
+ .logo { 
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
 
   nav ul {
     list-style: none;
@@ -113,10 +118,10 @@ const { title } = Astro.props;
   .nav-cta:hover { background: var(--accent-hover) !important; }
 
   /* Sections */
-  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  section { padding: 3rem 2rem; max-width: 1100px; margin: 0 auto; }
 
   /* Hero */
-  .hero { text-align: center; padding-top: 7rem; padding-bottom: 7rem; }
+  .hero { text-align: center; padding-top: 5rem; padding-bottom: 3rem; }
   .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -1px; }
   .hero p { font-size: 1.15rem; color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; }
 
