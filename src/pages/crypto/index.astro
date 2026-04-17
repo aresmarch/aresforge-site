@@ -1,0 +1,656 @@
+---
+// crypto.aresforge.dev — AresForge Crypto & Blockchain Hub
+// Drop this file at: src/pages/crypto/index.astro
+// Point subdomain crypto.aresforge.dev to this route in your Vercel config
+
+interface Product {
+  id: string;
+  tag: string;
+  name: string;
+  description: string;
+  price: string;
+  priceNote: string;
+  cta: string;
+  href: string;
+  status: 'live' | 'soon';
+}
+
+const products: Product[] = [
+  {
+    id: 'crypto-math',
+    tag: 'Educational · eBook + Python Tools',
+    name: 'Crypto Math Survival Guide',
+    description: 'The math that actually controls your crypto outcomes — percentages, position sizing, DCA, compounding, taxes, and chart reality. Includes working Python calculators for every concept.',
+    price: '$10',
+    priceNote: 'One-time · instant download',
+    cta: 'Get the Guide',
+    href: 'https://tenebrisbellum.gumroad.com/l/ihbxm',
+    status: 'live',
+  },
+  {
+    id: 'dca-tool',
+    tag: 'Web Tool · Python-Powered',
+    name: 'DCA & Risk Calculator',
+    description: 'Interactive browser-based tool for dollar-cost averaging simulation, position sizing, and recovery math. No spreadsheets. No installs.',
+    price: 'Coming Soon',
+    priceNote: '',
+    cta: 'Join Waitlist',
+    href: 'mailto:william@aresforge.dev?subject=DCA Tool Waitlist',
+    status: 'soon',
+  },
+  {
+    id: 'smart-contract',
+    tag: 'Engineering · Web3',
+    name: 'Smart Contract MVP',
+    description: 'Custom Solidity contracts — tokens, escrow, NFT drops, DAO primitives. Built, tested, and deployed by a full-stack engineer who also understands the math behind what you\'re building.',
+    price: 'From $350',
+    priceNote: 'Scoped per project',
+    cta: 'Start a Project',
+    href: 'https://www.aresforge.dev/contact',
+    status: 'live',
+  },
+];
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto & Blockchain — AresForge</title>
+  <meta name="description" content="Crypto tools, blockchain engineering, and math-first education from AresForge. Built by engineers who understand both the code and the math." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0b;
+      --bg-surface: #111113;
+      --bg-card: #141416;
+      --border: rgba(255,255,255,0.07);
+      --border-accent: rgba(255,255,255,0.14);
+      --text-primary: #f0ede8;
+      --text-secondary: #8a8680;
+      --text-muted: #4a4845;
+      --amber: #c8832a;
+      --amber-dim: rgba(200,131,42,0.12);
+      --amber-glow: rgba(200,131,42,0.06);
+      --teal: #1e9e75;
+      --teal-dim: rgba(30,158,117,0.1);
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    html { background: var(--bg); color: var(--text-primary); font-family: var(--font-mono); }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Grid texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      background: rgba(10,10,11,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-wordmark {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text-primary);
+    }
+
+    .nav-wordmark span {
+      color: var(--amber);
+    }
+
+    .nav-slash {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .nav-section {
+      font-size: 13px;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-cta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--amber);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(200,131,42,0.3);
+      padding: 6px 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--amber-dim);
+      border-color: rgba(200,131,42,0.6);
+    }
+
+    /* ── Main layout ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 160px 0 100px;
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--amber);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--amber);
+      opacity: 0.6;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--amber);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: #0a0a0b;
+      background: var(--amber);
+      border: none;
+      padding: 12px 24px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid var(--border-accent);
+      padding: 12px 24px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: var(--text-primary); }
+
+    /* ── Stats strip ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 100px;
+    }
+
+    .stat {
+      padding: 2rem 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child { border-right: none; padding-left: 2rem; }
+    .stat:not(:first-child) { padding-left: 2rem; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-num span { color: var(--amber); }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── Section header ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Product grid ── */
+    .products {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-bottom: 100px;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      padding: 2.5rem;
+      position: relative;
+      transition: background 0.2s;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .product-card:hover { background: var(--bg-surface); }
+
+    .product-card.featured {
+      border-left: 2px solid var(--amber);
+    }
+
+    .product-body {}
+
+    .product-tag {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    .product-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      min-width: 160px;
+    }
+
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      text-align: right;
+    }
+
+    .product-card.featured .product-price { color: var(--amber); }
+
+    .product-price-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: -8px;
+    }
+
+    .product-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      text-decoration: none;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .product-btn-live {
+      background: var(--amber);
+      color: #0a0a0b;
+    }
+
+    .product-btn-live:hover { opacity: 0.85; }
+
+    .product-btn-soon {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .product-btn-soon:hover { border-color: var(--border-accent); color: var(--text-secondary); }
+
+    .live-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--teal-dim);
+      color: var(--teal);
+      border: 1px solid rgba(30,158,117,0.25);
+      padding: 3px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── Philosophy strip ── */
+    .philosophy {
+      border: 1px solid var(--border);
+      padding: 3rem;
+      margin-bottom: 100px;
+      position: relative;
+      background: var(--amber-glow);
+    }
+
+    .philosophy-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-primary);
+      max-width: 680px;
+    }
+
+    .philosophy-quote em {
+      font-style: normal;
+      color: var(--amber);
+    }
+
+    .philosophy-attr {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    /* ── Upsell ── */
+    .upsell {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      margin-bottom: 60px;
+    }
+
+    .upsell-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .upsell-text p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-link {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: var(--amber); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag  { animation: fadeUp 0.5s ease both; }
+    h1         { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-sub  { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      nav { padding: 0 1.25rem; }
+      main { padding: 0 1.25rem; }
+      .hero { padding: 120px 0 60px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .stat:not(:first-child) { padding-left: 0; }
+      .product-card { grid-template-columns: 1fr; }
+      .product-action { align-items: flex-start; }
+      .upsell { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="https://www.aresforge.dev" class="nav-brand">
+      <span class="nav-wordmark">Ares<span>Forge</span></span>
+      <span class="nav-slash">/</span>
+      <span class="nav-section">crypto</span>
+    </a>
+    <a href="https://www.aresforge.dev/contact" class="nav-cta">Work With Us →</a>
+  </nav>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-tag">Crypto & Blockchain · AresForge</div>
+      <h1>The math doesn't lie.<br /><em>Neither do we.</em></h1>
+      <p class="hero-sub">
+        Tools, education, and engineering for people who want to understand crypto at the system level — not just ride the hype.
+      </p>
+      <div class="hero-actions">
+        <a href="https://tenebrisbellum.gumroad.com/l/ihbxm" class="btn-primary">Get the Crypto Math Guide →</a>
+        <a href="https://www.aresforge.dev/contact" class="btn-ghost">Talk to an Engineer</a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">8<span>+</span></div>
+        <div class="stat-label">Math Concepts Covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span>$</span>0</div>
+        <div class="stat-label">Fluff, Promises, or Signals</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-label">Built by Engineers</div>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="section-header">
+      <span class="section-label">Products</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="products">
+      {products.map((p, i) => (
+        <div class={`product-card ${i === 0 ? 'featured' : ''}`}>
+          <div class="product-body">
+            <div class="product-tag">
+              {p.tag}
+              {p.status === 'live' && <span class="live-badge">Live</span>}
+            </div>
+            <div class="product-name">{p.name}</div>
+            <div class="product-desc">{p.description}</div>
+          </div>
+          <div class="product-action">
+            <div>
+              <div class="product-price">{p.price}</div>
+              {p.priceNote && <div class="product-price-note">{p.priceNote}</div>}
+            </div>
+            <a
+              href={p.href}
+              class={`product-btn ${p.status === 'live' ? 'product-btn-live' : 'product-btn-soon'}`}
+              target={p.href.startsWith('http') ? '_blank' : undefined}
+              rel={p.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
+              {p.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Philosophy -->
+    <div class="philosophy">
+      <div class="philosophy-quote">
+        "Most crypto confusion doesn't come from not understanding blockchain.<br />
+        It comes from <em>misunderstanding basic math</em> in volatile conditions."
+      </div>
+      <div class="philosophy-attr">— Crypto Math Survival Guide · AresForge, 2025</div>
+    </div>
+
+    <!-- Upsell -->
+    <div class="upsell">
+      <div class="upsell-text">
+        <h2>Need the system, not just the math?</h2>
+        <p>
+          AresForge builds AI workflow automation, smart contract MVPs, and custom blockchain tooling for teams that are serious about shipping. We're engineers first — the education is just where it starts.
+        </p>
+      </div>
+      <a href="https://www.aresforge.dev" class="btn-ghost">AresForge.dev →</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-copy">© 2026 AresForge LLC · crypto.aresforge.dev</span>
+    <a href="mailto:william@aresforge.dev" class="footer-link">william@aresforge.dev</a>
+  </footer>
+
+</body>
+</html>
