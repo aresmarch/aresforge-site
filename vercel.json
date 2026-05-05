@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/crypto",
+      "source": "/(.*)",
+      "destination": "/crypto/$1",
       "has": [{ "type": "host", "value": "crypto.aresforge.dev" }]
     }
   ]
