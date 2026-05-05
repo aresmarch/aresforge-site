@@ -1,9 +1,10 @@
 {
   "redirects": [
     {
-      "source": "/crypto",
-      "destination": "https://crypto.aresforge.dev",
-      "permanent": true
+      "source": "/",
+      "destination": "/crypto",
+      "permanent": false,
+      "has": [{ "type": "host", "value": "crypto.aresforge.dev" }]
     }
   ]
 }
