@@ -1,14 +1,8 @@
 {
-  "redirects": [
+  "rewrites": [
     {
-      "source": "/crypto",
-      "destination": "https://crypto.aresforge.dev",
-      "permanent": true
-    },
-    {
-      "source": "/crypto/:path*",
-      "destination": "https://crypto.aresforge.dev/:path*",
-      "permanent": true
+      "source": "/",
+      "destination": "/crypto"
     }
   ]
 }
