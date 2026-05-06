@@ -1,9 +1,14 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "destination": "/crypto/$1",
-      "has": [{ "type": "host", "value": "crypto.aresforge.dev" }]
+      "source": "/crypto",
+      "destination": "https://crypto.aresforge.dev",
+      "permanent": true
+    },
+    {
+      "source": "/crypto/:path*",
+      "destination": "https://crypto.aresforge.dev/:path*",
+      "permanent": true
     }
   ]
-} 
+}
